@@ -94,7 +94,7 @@ export default function HomePage() {
       <Navigation variant="solid" />
 
       {/* Hero Section - Full Width Image */}
-      <section className="relative min-h-screen flex flex-col pt-16 md:pt-24 bg-[#f3f2ef]">
+      <section className="relative min-h-[85vh] md:min-h-screen flex flex-col pt-24 md:pt-32 bg-[#f3f2ef] overflow-hidden">
         {/* Topography Background using SVG Data URI */}
         <div
           className="absolute inset-0 pointer-events-none opacity-[0.03] z-0 mix-blend-multiply"
@@ -104,17 +104,17 @@ export default function HomePage() {
           }}
         />
 
-        <div className="relative z-10 w-full mx-auto px-4 sm:px-8 flex flex-col mb-12">
-          <div className="w-full flex flex-col items-start mt-8 lg:mt-12 relative z-20">
+        <div className="relative z-10 w-full mx-auto px-6 sm:px-8 flex flex-col mb-8 md:mb-12">
+          <div className="w-full flex flex-col items-start mt-4 md:mt-8 lg:mt-12 relative z-20">
             {/* Hero Text */}
             <div className="flex flex-col w-full">
-              <h1 className="text-5xl sm:text-7xl lg:text-[84px] leading-[1.05] tracking-tight font-medium text-gray-900 mb-8 md:mb-16">
-                Drop the laundry. <br />
+              <h1 className="text-4xl sm:text-7xl lg:text-[84px] leading-[1.1] md:leading-[1.05] tracking-tight font-medium text-gray-900 mb-6 md:mb-16 block">
+                Drop the laundry. <br className="hidden sm:block" />
                 <span className="text-[#008c5b]">Not your plans.</span>
               </h1>
 
               <div className="flex flex-col xl:flex-row xl:items-end justify-between w-full gap-8">
-                <p className="text-[15px] sm:text-[16px] text-gray-600 leading-[1.6] font-medium">
+                <p className="text-[15px] sm:text-[16px] text-gray-600 leading-[1.6] font-medium max-w-sm">
                   A convenient laundry solution that helps protect the
                   environment. Professional care, straight to your doorstep.
                 </p>
@@ -141,7 +141,7 @@ export default function HomePage() {
         </div>
 
         {/* Bottom Rack Image - Full Width, Full Height */}
-        <div className="relative w-full z-10 mt-auto">
+        <div className="relative w-full z-10 mt-8 md:mt-auto">
           <Image
             src="/images/heroimg.png"
             alt="Laundry Illustration"
