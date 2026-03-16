@@ -1,15 +1,14 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Poppins } from "next/font/google"
+import { Inter } from "next/font/google"
 import "./globals.css"
 import { Toaster } from "@/components/toaster"
 import { WhatsAppFloat } from "@/components/whatsapp-float"
 import { AiSuperChatbot } from "@/components/ai-super-chatbot"
 import { AuthProvider } from "@/contexts/auth-context"
 
-const poppins = Poppins({
+const inter = Inter({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700", "800", "900"],
 })
 
 export const metadata: Metadata = {
@@ -75,7 +74,7 @@ export default function RootLayout({
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <meta name="theme-color" content="#0d9488" />
       </head>
-      <body className={poppins.className}>
+      <body className={inter.className}>
         <AuthProvider>
           {children}
         </AuthProvider>

@@ -11,13 +11,13 @@ import {
   Star,
   CheckCircle,
   Sparkles,
-  Shirt  as Iron,
+  Shirt as Iron,
   Crown,
   WashingMachine,
   Phone,
   MapPin,
-  PhoneIcon,
   MessageCircle,
+  ArrowUpRight,
 } from "lucide-react";
 import { Navigation } from "@/components/navigation";
 import { Footer } from "@/components/footer";
@@ -25,41 +25,29 @@ import { getTelHref, getWhatsAppHref, PHONE_DISPLAY } from "@/lib/phone";
 
 const cardData = [
   {
-    icon: <MessageCircle className="h-8 w-8 text-green-600" />,
+    icon: <MessageCircle className="h-8 w-8 text-[#008c5b]" />,
     title: "Free Pickup & Delivery",
     description:
       "Doorstep service across Kottayam. Schedule a pickup with just one click. It's fast, easy, and hassle-free.",
   },
   {
-    icon: <Clock className="h-8 w-8 text-green-600" />,
+    icon: <Clock className="h-8 w-8 text-[#008c5b]" />,
     title: "24–48 Hour Turnaround",
     description:
       "Fast service without compromising quality. Express options available. Clean clothes, right on time.",
   },
   {
-    icon: <CheckCircle className="h-8 w-8 text-green-600" />,
+    icon: <CheckCircle className="h-8 w-8 text-[#008c5b]" />,
     title: "100% Satisfaction Guaranteed",
     description:
       "Not satisfied? We’ll make it right. Your happiness is our priority — no questions asked.",
   },
 ];
 
-const WhatsappIcon = (props: any) => (
-  <svg
-    width="16"
-    height="16"
-    viewBox="0 0 24 24"
-    fill="currentColor"
-    className="mr-2"
-  >
-    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.465 3.488" />
-  </svg>
-);
-
 export default function HomePage() {
   const services = [
     {
-      icon: WashingMachine ,
+      icon: WashingMachine,
       title: "Wash & Iron",
       description: "Professional washing and ironing service",
       price: "₹160/kg",
@@ -92,164 +80,119 @@ export default function HomePage() {
       title: "Premium Care",
       description: "Luxury treatment for premium garments",
       price: "₹220/kg",
-      features: ["Hand washing for special garments", "starching included", "individual washing"],
-    },
-  ];
-
-  const testimonials = [
-    {
-      name: "Priya Nair",
-      location: "Kottayam",
-      rating: 5,
-      comment:
-        "Excellent service! My clothes come back perfectly clean and fresh. The pickup and delivery is so convenient.",
-    },
-    {
-      name: "Rajesh Kumar",
-      location: "Changanassery",
-      rating: 5,
-      comment:
-        "Best laundry service in the area. Professional staff and great quality work. Highly recommended!",
-    },
-    {
-      name: "Meera Thomas",
-      location: "Pala",
-      rating: 5,
-      comment:
-        "They handle my delicate fabrics with such care. The dry cleaning service is outstanding.",
+      features: [
+        "Hand washing for special garments",
+        "starching included",
+        "individual washing",
+      ],
     },
   ];
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen flex flex-col font-sans">
       {/* Navigation with dark text */}
       <Navigation variant="solid" />
 
-      {/* Hero Section - Simplified */}
+      {/* Hero Section - Full Width Image */}
+      <section className="relative min-h-screen flex flex-col pt-16 md:pt-24 bg-[#f3f2ef]">
+        {/* Topography Background using SVG Data URI */}
+        <div
+          className="absolute inset-0 pointer-events-none opacity-[0.03] z-0 mix-blend-multiply"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3Cpattern id='topo' width='100' height='100' patternUnits='userSpaceOnUse'%3E%3Cpath d='M0 100 Q 25 80 50 100 T 100 100 M0 80 Q 25 60 50 80 T 100 80 M0 60 Q 25 40 50 60 T 100 60 M0 40 Q 25 20 50 40 T 100 40 M0 20 Q 25 0 50 20 T 100 20' fill='none' stroke='%23000' stroke-width='0.5'/%3E%3C/pattern%3E%3C/defs%3E%3Crect width='100%25' height='100%25' fill='url(%23topo)'/%3E%3C/svg%3E")`,
+            backgroundSize: "400px",
+          }}
+        />
 
-      <section className="min-h-screen bg-[#f3f2ef] flex items-center px-6 sm:px-12 lg:px-24">
-        <div className="max-w-[1440px] mx-auto w-full flex flex-col-reverse lg:flex-row items-center justify-between gap-16 lg:gap-24">
-          {/* LEFT SIDE */}
-          <div className="w-full lg:w-1/2 text-center lg:text-left space-y-8">
-            <h1 className="text-4xl sm:text-6xl xl:text-7xl font-bold text-gray-900 leading-tight tracking-tight">
-              Drop the laundry
-              <br />
-              <span className="text-[#008c5b]">Not your plans</span>
-            </h1>
+        <div className="relative z-10 w-full mx-auto px-4 sm:px-8 flex flex-col mb-12">
+          <div className="w-full flex flex-col items-start mt-8 lg:mt-12 relative z-20">
+            {/* Hero Text */}
+            <div className="flex flex-col w-full">
+              <h1 className="text-5xl sm:text-7xl lg:text-[84px] leading-[1.05] tracking-tight font-medium text-gray-900 mb-8 md:mb-16">
+                Drop the laundry. <br />
+                <span className="text-[#008c5b]">Not your plans.</span>
+              </h1>
 
-            <p className="text-base sm:text-lg text-gray-600 max-w-xl mx-auto lg:mx-0">
-              A convenient laundry solution that helps protect the environment.
-            </p>
+              <div className="flex flex-col xl:flex-row xl:items-end justify-between w-full gap-8">
+                <p className="text-[15px] sm:text-[16px] text-gray-600 leading-[1.6] font-medium">
+                  A convenient laundry solution that helps protect the
+                  environment. Professional care, straight to your doorstep.
+                </p>
 
-            {/* New Button and Contact Section */}
-            <div className="space-y-4 lg:space-y-0">
-              <div className="flex flex-col sm:flex-row justify-center lg:justify-start gap-4 mb-8">
-                <Button
-                  asChild
-                  size="lg"
-                  className="bg-[#008c5b] hover:bg-green-700 rounded-full"
-                >
-                  <Link href="/booking">Schedule Free Pickup</Link>
-                </Button>
-                <Button
-                  asChild
-                  variant="outline"
-                  size="lg"
-                  className="border-gray-300 text-gray-800  hover:text-[#008c5d] hover:border-[#008c5d] bg-transparent rounded-full transition-colors duration-200"
-                >
-                  <Link href="/services">View Services</Link>
-                </Button>
-              </div>
-
-              <div className="flex flex-col justify-center lg:justify-start gap-4 text-gray-700 font-medium">
-                <Link
-                  href={getTelHref()}
-                  className="flex items-center gap-2 group hover:text-[#008c5b] transition-colors duration-200"
-                >
-                  <Phone className="h-5 w-5" />
-                  <span className="relative pb-0.5 after:bg-[#008c5b] after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-0 group-hover:after:w-full after:transition-all after:duration-300">
-                    Call: {PHONE_DISPLAY}
-                  </span>
-                </Link>
-
-                <Link
-                  href={getWhatsAppHref()}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2 group hover:text-[#008c5b] transition-colors duration-200"
-                >
-                  <svg
-                    width="20"
-                    height="20"
-                    viewBox="0 0 24 24"
-                    fill="currentColor"
+                <div className="flex flex-col gap-4">
+                  <Link
+                    href="/booking"
+                    className="group flex gap-1.5 justify-between items-center border-b border-[#008c5b] pb-1 text-[14px] text-[#008c5b] font-medium hover:border-gray-900 hover:text-gray-900 transition-colors"
                   >
-                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.465 3.488" />
-                  </svg>
-                  <span className="relative pb-0.5 after:bg-[#008c5b] after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-0 group-hover:after:w-full after:transition-all after:duration-300">
-                    WhatsApp Us
-                  </span>
-                </Link>
+                    Schedule Free Pickup
+                    <ArrowUpRight className="w-4 h-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                  </Link>
+
+                  <Link
+                    href={getTelHref()}
+                    className="group flex gap-1.5 justify-between items-center border-b border-transparent pb-1 text-[14px] text-gray-600 font-medium hover:text-[#008c5b] transition-colors"
+                  >
+                    Call: {PHONE_DISPLAY}
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
+        </div>
 
-          {/* RIGHT SIDE IMAGE */}
-          <div className="w-full lg:w-1/2 flex justify-center pt-24 lg:pt-0">
-            <div className="  max-w-md lg:max-w-lg">
-              <Image
-                src="/images/hero.png"
-                alt="Laundry Illustration"
-                width={700}
-                height={700}
-                className="w-full h-auto object-contain"
-              />
-            </div>
-          </div>
+        {/* Bottom Rack Image - Full Width, Full Height */}
+        <div className="relative w-full z-10 mt-auto">
+          <Image
+            src="/images/heroimg.png"
+            alt="Laundry Illustration"
+            width={1920}
+            height={600}
+            className="w-full h-auto object-contain pointer-events-none drop-shadow-[0_20px_40px_rgba(0,0,0,0.1)] opacity-95"
+            priority
+          />
         </div>
       </section>
 
       {/* Features Section */}
-      <section className=" py-16 sm:py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-16 sm:py-24 bg-white relative z-20 shadow-[0_-10px_40px_rgba(0,0,0,0.03)]">
+        <div className="max-w-[1440px] mx-auto px-6 sm:px-12 lg:px-24">
           <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-              Why Choose dresscode???
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-medium tracking-tight text-gray-900 mb-6">
+              Why Choose dresscode?
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto font-light">
               We combine traditional care with modern convenience to deliver
-              exceptional laundry services
+              exceptional laundry services.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10">
             {cardData.map((card, index) => (
               <div
                 key={index}
-                className="flex flex-col justify-between bg-[#ffffff] p-5 rounded-3xl shadow-md min-h-[300px]"
+                className="group flex flex-col justify-between bg-gray-50 hover:bg-[#008c5b]/5 p-8 sm:p-10 rounded-[2rem] sm:rounded-[2.5rem] border border-gray-100 transition-all duration-300 min-h-[320px]"
               >
-                {/* Top Section */}
                 <div>
-                  <div className="mb-4">{card.icon}</div>
+                  <div className="mb-8 bg-white w-16 h-16 rounded-2xl flex items-center justify-center shadow-sm text-[#008c5b] group-hover:scale-110 transition-transform duration-300">
+                    {card.icon}
+                  </div>
 
-                  <h2 className="text-2xl font-normal text-gray-900 mb-2 leading-snug">
+                  <h3 className="text-2xl font-medium text-gray-900 mb-4 leading-snug">
                     {card.title}
-                  </h2>
+                  </h3>
 
-                  <p className="text-gray-600 text-sm leading-relaxed mb-4">
+                  <p className="text-gray-600 leading-relaxed mb-6 font-light">
                     {card.description}
                   </p>
                 </div>
 
-                {/* Button */}
-                <Button
-                  asChild
-                  variant="outline"
-                  size="lg"
-                  className="border-gray-300 text-gray-800 hover:text-[#008c5d] hover:border-[#008c5d] bg-transparent rounded-full transition-colors duration-200"
+                <Link
+                  href="/booking"
+                  className="inline-flex items-center text-[14px] text-[#008c5b] font-medium group-hover:text-gray-900 transition-colors w-max pb-1 border-b border-transparent group-hover:border-gray-900"
                 >
-                  <Link href="/booking">Book Now</Link>
-                </Button>
+                  Book Now{" "}
+                  <ArrowUpRight className="ml-1 w-4 h-4 opacity-0 -translate-x-2 translate-y-2 group-hover:opacity-100 group-hover:translate-x-0 group-hover:translate-y-0 transition-all" />
+                </Link>
               </div>
             ))}
           </div>
@@ -257,126 +200,105 @@ export default function HomePage() {
       </section>
 
       {/* Services Section */}
-      <section className="py-16 sm:py-24 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-16 sm:py-24 bg-white relative overflow-hidden">
+        {/* Subtle background pattern */}
+        <div
+          className="absolute inset-0 pointer-events-none opacity-[0.02] z-0"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3Cpattern id='topo' width='100' height='100' patternUnits='userSpaceOnUse'%3E%3Cpath d='M0 100 Q 25 80 50 100 T 100 100 M0 80 Q 25 60 50 80 T 100 80 M0 60 Q 25 40 50 60 T 100 60 M0 40 Q 25 20 50 40 T 100 40 M0 20 Q 25 0 50 20 T 100 20' fill='none' stroke='%23000' stroke-width='0.5'/%3E%3C/pattern%3E%3C/defs%3E%3Crect width='100%25' height='100%25' fill='url(%23topo)'/%3E%3C/svg%3E")`,
+            backgroundSize: "400px",
+          }}
+        />
+
+        <div className="max-w-[1440px] mx-auto px-6 sm:px-12 lg:px-24 relative z-10">
           <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-medium tracking-tight text-gray-900 mb-6">
               Our Services
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto font-light">
               Professional care for all your garments with transparent pricing
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {services.map((service, index) => (
-              <Card
+              <div
                 key={index}
-                className="hover:shadow-xl transition-all duration-300 border-0 shadow-md group"
+                className="group flex flex-col justify-between bg-gray-50/50 hover:bg-white p-8 sm:p-10 rounded-[2.5rem] border border-gray-100 hover:border-[#008c5b]/20 hover:shadow-2xl hover:shadow-[#008c5b]/5 transition-all duration-500 min-h-[520px]"
               >
-                <CardContent className="p-6">
-                  <div className="w-12 h-12 bg-gradient-to-r from-emerald-500 to-emerald-600 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                    <service.icon className="h-8 w-8 text-white" />
+                <div>
+                  <div className="mb-8 bg-white w-16 h-16 rounded-2xl flex items-center justify-center shadow-sm text-[#008c5b] group-hover:scale-110 group-hover:bg-[#008c5b] group-hover:text-white transition-all duration-300">
+                    <service.icon className="h-8 w-8" />
                   </div>
 
-                  <h3 className="text-xl font-semibold mb-2">
+                  <h3 className="text-2xl font-medium text-gray-900 mb-2 leading-snug">
                     {service.title}
                   </h3>
-                  <p className="text-gray-600 mb-4">{service.description}</p>
+                  <p className="text-gray-500 font-light mb-8 text-sm leading-relaxed">
+                    {service.description}
+                  </p>
 
-                  <div className="mb-4">
-                    <span className="text-xl font-bold text-emerald-600 ">
+                  <div className="mb-8">
+                    <p className="text-[12px] uppercase tracking-wider font-semibold text-gray-400 mb-1">Starting from</p>
+                    <span className="text-4xl font-semibold text-[#008c5b]">
                       {service.price}
                     </span>
                   </div>
 
-                  <ul className="space-y-2 mb-6">
+                  <ul className="space-y-4 mb-10">
                     {service.features.map((feature, idx) => (
                       <li
                         key={idx}
-                        className="flex items-center text-sm text-gray-600"
+                        className="flex items-center text-[14px] text-gray-600 font-light"
                       >
-                        <CheckCircle className="h-4 w-4 text-emerald-500 mr-2 flex-shrink-0" />
+                        <div className="w-1.5 h-1.5 rounded-full bg-[#008c5b] mr-3 opacity-40 group-hover:opacity-100 transition-opacity" />
                         {feature}
                       </li>
                     ))}
                   </ul>
+                </div>
 
-                  <Button
-                    asChild
-                    className="w-full bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 rounded-full"
+                <div className="pt-6 border-t border-gray-100">
+                  <Link
+                    href="/booking"
+                    className="inline-flex items-center text-[15px] text-[#008c5b] font-medium group-hover:text-gray-900 transition-colors w-full justify-between"
                   >
-                    <Link href="/booking">Book This Service</Link>
-                  </Button>
-                </CardContent>
-              </Card>
+                    <span>Explore Service</span>
+                    <div className="w-10 h-10 rounded-full bg-white border border-gray-100 flex items-center justify-center group-hover:bg-[#008c5b] group-hover:text-white group-hover:border-[#008c5b] transition-all duration-300">
+                      <ArrowUpRight className="w-5 h-5 transition-transform group-hover:scale-110" />
+                    </div>
+                  </Link>
+                </div>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Testimonials Section
-      <section className="py-16 sm:py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-              What Our Customers Say
-            </h2>
-            <p className="text-xl text-gray-600">
-              Join thousands of satisfied customers across Kottayam
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {testimonials.map((testimonial, index) => (
-              <Card
-                key={index}
-                className="hover:shadow-lg transition-shadow border-0 shadow-md"
-              >
-                <CardContent className="p-6">
-                  <div className="flex items-center mb-4">
-                    {[...Array(testimonial.rating)].map((_, i) => (
-                      <Star
-                        key={i}
-                        className="h-5 w-5 text-yellow-400 fill-current"
-                      />
-                    ))}
-                  </div>
-
-                  <p className="text-gray-600 mb-4 italic">
-                    "{testimonial.comment}"
-                  </p>
-
-                  <div>
-                    <p className="font-semibold">{testimonial.name}</p>
-                    <p className="text-sm text-gray-500 flex items-center">
-                      <MapPin className="h-4 w-4 mr-1" />
-                      {testimonial.location}
-                    </p>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section> */}
-
       {/* CTA Section */}
-      <section className="py-16 sm:py-24 bg-gradient-to-r from-emerald-600 to-emerald-800">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
-            Ready to Experience Premium Laundry Care?
+      <section className="py-20 sm:py-28 bg-[#008c5b] relative overflow-hidden">
+        {/* Subtle background pattern */}
+        <div
+          className="absolute inset-0 pointer-events-none opacity-[0.05] z-0 mix-blend-overlay"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3Cpattern id='topo' width='100' height='100' patternUnits='userSpaceOnUse'%3E%3Cpath d='M0 100 Q 25 80 50 100 T 100 100 M0 80 Q 25 60 50 80 T 100 80 M0 60 Q 25 40 50 60 T 100 60 M0 40 Q 25 20 50 40 T 100 40 M0 20 Q 25 0 50 20 T 100 20' fill='none' stroke='%23000' stroke-width='0.5'/%3E%3C/pattern%3E%3C/defs%3E%3Crect width='100%25' height='100%25' fill='url(%23topo)'/%3E%3C/svg%3E")`,
+            backgroundSize: "400px",
+          }}
+        />
+
+        <div className="max-w-[1440px] mx-auto px-6 sm:px-12 lg:px-24 text-center relative z-10">
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-medium tracking-tight text-white mb-6">
+            Ready to Experience <br className="hidden sm:block" /> Premium Care?
           </h2>
-          <p className="text-xl text-emerald-100 mb-8 max-w-3xl mx-auto">
+          <p className="text-lg text-emerald-50 mb-10 max-w-2xl mx-auto font-light">
             Schedule your free pickup today and discover why we're Kottayam's
-            most trusted laundry service
+            most trusted laundry service.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <Button
               asChild
-              size="lg"
-              className="bg-white text-emerald-600 hover:bg-gray-100 shadow-lg text-lg px-8 py-6 rounded-full"
+              className="bg-white text-[#008c5b] hover:bg-gray-50 text-[15px] h-14 px-8 rounded-full font-medium transition-colors w-full sm:w-auto"
             >
               <Link href="/booking">Schedule Free Pickup</Link>
             </Button>
@@ -384,10 +306,9 @@ export default function HomePage() {
             <Button
               asChild
               variant="outline"
-              size="lg"
-              className="border-2 border-white text-white hover:bg-white/10 text-lg px-8 py-6 rounded-full bg-transparent"
+              className="border-white/30 text-white hover:bg-white/10 hover:border-white text-[15px] h-14 px-8 rounded-full font-medium transition-all w-full sm:w-auto bg-transparent backdrop-blur-sm"
             >
-              <Link href={getTelHref()}>Call Now</Link>
+              <Link href={getTelHref()}>Call Now {PHONE_DISPLAY}</Link>
             </Button>
           </div>
         </div>

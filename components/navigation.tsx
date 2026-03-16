@@ -36,7 +36,6 @@ export function Navigation({ variant = "solid" }: NavigationProps) {
     { href: "/", label: "Home" },
     { href: "/services", label: "Services" },
     { href: "/pricing", label: "Pricing" },
-    { href: "/booking", label: "Book Now" },
     { href: "/track", label: "Track Order" },
     { href: "/contact", label: "Contact" },
   ]
@@ -45,62 +44,48 @@ export function Navigation({ variant = "solid" }: NavigationProps) {
   return (
     <>
       <nav
-        className="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl bg-white border-b border-gray-200/50 shadow-lg"
+        className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-100"
         role="navigation"
         aria-label="Main navigation"
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-20">
-          <div className="flex items-center">
-  <Link href="/" aria-label="Dresscode Laundry Home" className="flex items-center">
-    <Image
-      src="/dresscodelogo2.png"
-      alt="Dresscode Laundry Logo"
-      width={80}
-      height={30}
-      priority
-      className="w-16 h-auto sm:w-18 md:w-20 lg:w-24 transition-all duration-300"
-    />
-  </Link>
-</div>
+        {/* Top Accent Bar */}
+        <div className="h-1.5 md:h-2 bg-black w-full" />
 
+        {/* Topography Background */}
+        <div
+          className="absolute inset-0 pointer-events-none opacity-[0.03] z-0"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3Cpattern id='topo_nav' width='100' height='100' patternUnits='userSpaceOnUse'%3E%3Cpath d='M0 100 Q 25 80 50 100 T 100 100 M0 80 Q 25 60 50 80 T 100 80 M0 60 Q 25 40 50 60 T 100 60 M0 40 Q 25 20 50 40 T 100 40 M0 20 Q 25 0 50 20 T 100 20' fill='none' stroke='%23000' stroke-width='0.5'/%3E%3C/pattern%3E%3C/defs%3E%3Crect width='100%25' height='100%25' fill='url(%23topo_nav)'/%3E%3C/svg%3E")`,
+            backgroundSize: "300px",
+          }}
+        />
 
-            {/* Center - Book Now Button (Mobile) */}
-            <div className="md:hidden">
-              <Button
-                asChild
-                size="sm"
-                className="bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white px-4 py-2 rounded-full text-sm font-medium transition-all duration-200"
-              >
-                <Link href="/booking">Book Now</Link>
-              </Button>
-            </div>
-
-            {/* Right - Menu Button (Mobile) */}
-            <div className="md:hidden">
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={toggleMobileMenu}
-                className="text-gray-700 hover:text-emerald-600 hover:bg-emerald-50 backdrop-blur-sm rounded-full transition-all duration-200"
-                aria-label={isMobileMenuOpen ? "Close mobile menu" : "Open mobile menu"}
-                aria-expanded={isMobileMenuOpen}
-              >
-                <Menu className="h-5 w-5 text-[#07553f]" />
-              </Button>
+        <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-12 relative z-10">
+          <div className="flex justify-between items-center h-20 md:h-24">
+            <div className="flex items-center">
+              <Link href="/" aria-label="Dresscode Laundry Home" className="flex items-center">
+                <Image
+                  src="/dresscodelogo2.png"
+                  alt="Dresscode Laundry Logo"
+                  width={80}
+                  height={30}
+                  priority
+                  className="w-16 h-auto sm:w-18 md:w-20 lg:w-24 transition-all duration-300"
+                />
+              </Link>
             </div>
 
             {/* Desktop navigation */}
-            <div className="hidden md:block">
-              <div className="ml-10 flex items-baseline space-x-1">
+            <div className="hidden md:flex items-center space-x-10 lg:space-x-12">
+              <div className="flex items-baseline space-x-8 lg:space-x-10">
                 {navItems.map((item) => (
                   <Link
                     key={item.href}
                     href={item.href}
-                    className={`px-4 py-3 text-sm font-medium transition-all duration-300 rounded-xl hover:bg-emerald-50 backdrop-blur-sm ${
+                    className={`text-[13px] lg:text-[14px] font-medium tracking-wide transition-all duration-300 ${
                       isActive(item.href)
-                        ? "text-emerald-600 font-semibold bg-emerald-50"
-                        : "text-gray-700 hover:text-emerald-600"
+                        ? "text-black font-bold"
+                        : "text-gray-500 hover:text-black"
                     }`}
                     aria-current={isActive(item.href) ? "page" : undefined}
                   >
@@ -108,15 +93,35 @@ export function Navigation({ variant = "solid" }: NavigationProps) {
                   </Link>
                 ))}
               </div>
-            </div>
 
-            {/* Desktop Book Now Button */}
-            <div className="hidden md:flex items-center space-x-4">
+              {/* Desktop Book Now Button */}
               <Button
                 asChild
-                className="bg-gradient-to-r from-emerald-500 to-emerald-900 hover:from-emerald-600 hover:to-emerald-800 text-white transition-all duration-300 rounded-full"
+                className="bg-black hover:bg-gray-900 text-white transition-all duration-300 rounded-full px-8 py-6 text-[13px] font-bold uppercase tracking-wider"
               >
-                <Link href="/booking">Schedule Pickup</Link>
+                <Link href="/booking">Book Now</Link>
+              </Button>
+            </div>
+
+            {/* Mobile Actions */}
+            <div className="flex md:hidden items-center space-x-4">
+              <Button
+                asChild
+                size="sm"
+                className="bg-black hover:bg-gray-900 text-white px-5 rounded-full text-[12px] font-bold uppercase tracking-wider"
+              >
+                <Link href="/booking">Book Now</Link>
+              </Button>
+              
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={toggleMobileMenu}
+                className="text-black hover:bg-gray-100 rounded-full transition-all duration-200"
+                aria-label={isMobileMenuOpen ? "Close mobile menu" : "Open mobile menu"}
+                aria-expanded={isMobileMenuOpen}
+              >
+                <Menu className="h-6 w-6" />
               </Button>
             </div>
           </div>
@@ -159,10 +164,10 @@ export function Navigation({ variant = "solid" }: NavigationProps) {
                 <Link
                   key={item.href}
                   href={item.href}
-                  className={`block px-4 py-3 text-base font-medium transition-all duration-700 rounded-xl hover:bg-emerald-50 hover:scale-105 hover:shadow-sm ${
+                  className={`block px-4 py-3 text-base font-medium transition-all duration-700 rounded-xl hover:bg-gray-50 hover:scale-105 ${
                     isActive(item.href)
-                      ? "text-emerald-600 font-semibold bg-emerald-50 scale-105"
-                      : "text-gray-700 hover:text-emerald-600"
+                      ? "text-black font-semibold bg-gray-50 scale-105"
+                      : "text-gray-600 hover:text-black"
                   } ${isMobileMenuOpen ? "opacity-100 translate-x-0" : "opacity-0 translate-x-8"}`}
                   style={{
                     transitionDelay: isMobileMenuOpen ? `${200 + index * 100}ms` : "0ms",
@@ -175,15 +180,15 @@ export function Navigation({ variant = "solid" }: NavigationProps) {
             </div>
 
             <div
-              className={`px-6 py-4 border-t border-gray-200 mt-4 transition-all duration-700 delay-500 ${
+              className={`px-6 py-4 border-t border-gray-100 mt-4 transition-all duration-700 delay-500 ${
                 isMobileMenuOpen ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
               }`}
             >
-              <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-3">Contact Us</h3>
+              <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-widest mb-3">Contact Us</h3>
               <div className="space-y-3">
                 <Link
                   href={getTelHref()}
-                  className="flex items-center gap-3 px-4 py-3 text-gray-700 hover:text-emerald-600 hover:bg-emerald-50 rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-sm group"
+                  className="flex items-center gap-3 px-4 py-3 text-gray-600 hover:text-black hover:bg-gray-50 rounded-xl transition-all duration-300 hover:scale-105 group"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   <Phone className="h-5 w-5 transition-transform duration-300 group-hover:scale-110" />
@@ -193,7 +198,7 @@ export function Navigation({ variant = "solid" }: NavigationProps) {
                   href={getWhatsAppHref()}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-3 px-4 py-3 text-gray-700 hover:text-green-600 hover:bg-green-50 rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-sm group"
+                  className="flex items-center gap-3 px-4 py-3 text-gray-600 hover:text-black hover:bg-gray-50 rounded-xl transition-all duration-300 hover:scale-105 group"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   <svg
@@ -211,16 +216,16 @@ export function Navigation({ variant = "solid" }: NavigationProps) {
             </div>
 
             <div
-              className={`px-6 py-6 border-t border-gray-200 mt-auto transition-all duration-700 delay-700 ${
+              className={`px-6 py-6 border-t border-gray-100 mt-auto transition-all duration-700 delay-700 ${
                 isMobileMenuOpen ? "opacity-100 translate-y-0 scale-100" : "opacity-0 translate-y-8 scale-95"
               }`}
             >
               <Button
                 asChild
-                className="w-full bg-emerald-600 hover:bg-emerald-700 text-white rounded-full py-3 transition-all duration-300 hover:scale-105 hover:shadow-lg transform"
+                className="w-full bg-black hover:bg-gray-900 text-white rounded-full py-6 transition-all duration-300 hover:scale-105 transform uppercase text-[12px] font-bold tracking-widest"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
-                <Link href="/booking">Schedule Pickup</Link>
+                <Link href="/booking">Book Now</Link>
               </Button>
             </div>
           </div>
