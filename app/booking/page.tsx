@@ -253,7 +253,9 @@ function BookingPageContent() {
           name: formData.name,
           phone: formData.phone,
           email: formData.email,
-          address: formData.address,
+          address: formData.useCurrentLocation && !formData.address.trim() 
+            ? (locationCoords.lat ? `Location coordinates: ${locationCoords.lat}, ${locationCoords.lng}` : "Location provided via GPS") 
+            : formData.address,
           location: formData.useCurrentLocation ? locationCoords : null
         },
         services: payloadServices,

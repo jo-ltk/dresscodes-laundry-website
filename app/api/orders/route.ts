@@ -79,7 +79,10 @@ export async function POST(req: NextRequest) {
     const { customer, services, pickupDate, pickupTimeSlot, notes } = body;
 
     // Validation
-    if (!customer?.name || !customer?.phone || !customer?.address) {
+    const hasAddress = customer?.address?.trim();
+    const hasLocation = customer?.location?.lat && customer?.location?.lng;
+    
+    if (!customer?.name || !customer?.phone || (!hasAddress && !hasLocation)) {
       return NextResponse.json(
         { error: "Customer name, phone, and address are required" },
         { status: 400 }
@@ -111,7 +114,9 @@ export async function POST(req: NextRequest) {
         name: customer.name.trim(),
         phone: customer.phone.trim(),
         email: customer.email?.trim(),
-        address: customer.address.trim(),
+        address: customer.address 
+          ? customer.address.trim() 
+          : `Location coordinates: ${customer.location?.lat}, ${customer.location?.lng}`,
       },
       services: services.map((s: any) => ({
         serviceId: s.serviceId,
