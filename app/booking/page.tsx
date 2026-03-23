@@ -289,13 +289,12 @@ function BookingPageContent() {
       });
       waMessage += `\n*Total: ₹${formatPrice(totalPrice)}*`;
 
-      // 3. Success Toast & Redirect/WhatsApp
+      // 3. Success Toast & Redirect via WhatsApp
       toast({ title: "Booking Successful!", description: "Opening WhatsApp to confirm..." });
       
-      setTimeout(() => {
-        window.open(getWhatsAppHref(waMessage), '_blank');
-        router.push(`/track/${result.order.orderNumber}`);
-      }, 1000);
+      // Use window.location.href instead of window.open to avoid mobile popup blockers
+      const whatsappUrl = getWhatsAppHref(waMessage);
+      window.location.href = whatsappUrl;
 
     } catch (err: any) {
       toast({ title: "Booking Failed", description: err.message, variant: "destructive" });

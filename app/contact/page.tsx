@@ -109,7 +109,7 @@ Message: ${formData.message}
 Timestamp: ${new Date().toLocaleString()}`;
 
       const whatsappUrl = getWhatsAppHref(whatsappMessage);
-      window.open(whatsappUrl, '_blank');
+      window.location.href = whatsappUrl;
 
       // Reset form
       setFormData({

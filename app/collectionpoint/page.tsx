@@ -233,7 +233,7 @@ export default function FranchisePage() {
 
 _Submitted on: ${new Date().toLocaleString()}_`;
 
-      window.open(getWhatsAppHref(whatsappMessage), "_blank");
+      window.location.href = getWhatsAppHref(whatsappMessage);
 
       toast({
         title: "Opening WhatsApp...",

@@ -4,7 +4,6 @@ import { Inter } from "next/font/google"
 import "./globals.css"
 import { Toaster } from "@/components/toaster"
 import { WhatsAppFloat } from "@/components/whatsapp-float"
-import { AiSuperChatbot } from "@/components/ai-super-chatbot"
 import { AuthProvider } from "@/contexts/auth-context"
 
 const inter = Inter({
@@ -79,7 +78,7 @@ export default function RootLayout({
           {children}
         </AuthProvider>
 
-        <AiSuperChatbot />
+        <WhatsAppFloat />
         <Toaster />
       </body>
     </html>
