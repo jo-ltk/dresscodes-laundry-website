@@ -56,6 +56,14 @@ interface CartItem extends PricingItem {
   category: string;
 }
 
+const getIroningPrice = (itemName: string) => {
+  const name = itemName.toLowerCase();
+  if (name.includes("shawl") || name.includes("blouse")) return 15;
+  if (name.includes("dhoti") || name.includes("dhothi")) return 30;
+  if (name.includes("saree") || name.includes("salwar") || name.includes("suit")) return 40;
+  return 20;
+};
+
 function BookingPageContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -163,7 +171,7 @@ function BookingPageContent() {
   const totalPrice = useMemo(() => {
     if (serviceType === "wash-iron") return estWeight * 160;
     if (serviceType === "premium") return estWeight * 220;
-    if (serviceType === "ironing") return cart.reduce((sum, item) => sum + (item.quantity * 20), 0);
+    if (serviceType === "ironing") return cart.reduce((sum, item) => sum + (item.quantity * getIroningPrice(item.Item)), 0);
     return cart.reduce((sum, item) => sum + (item.quantity * item.Price), 0);
   }, [cart, serviceType, estWeight]);
 
@@ -243,7 +251,7 @@ function BookingPageContent() {
         : cart.map(i => ({ 
             serviceId: i.SNo.toString(),
             name: i.Item, 
-            price: serviceType === "ironing" ? 20 : i.Price, 
+            price: serviceType === "ironing" ? getIroningPrice(i.Item) : i.Price, 
             quantity: i.quantity,
             category: i.category
           }));
@@ -287,7 +295,8 @@ function BookingPageContent() {
       waMessage += `*Pickup:* ${format(formData.pickupDate!, "dd MMM")} | ${formData.timeSlot}\n\n`;
       waMessage += `*Items:*\n`;
       cart.forEach((item, idx) => {
-        waMessage += `${idx + 1}. ${item.Item} (x${item.quantity}) - ₹${formatPrice(item.Price * item.quantity)}\n`;
+        const itemPrice = serviceType === "ironing" ? getIroningPrice(item.Item) : item.Price;
+        waMessage += `${idx + 1}. ${item.Item} (x${item.quantity}) - ₹${formatPrice(itemPrice * item.quantity)}\n`;
       });
       waMessage += `\n*Total: ₹${formatPrice(totalPrice)}*`;
 
@@ -444,7 +453,7 @@ function BookingPageContent() {
                       <div className="flex-1">
                         <p className="text-[10px] text-emerald-600 font-bold uppercase tracking-wider mb-0.5 opacity-70">{category}</p>
                         <h4 className="font-bold text-gray-800 group-hover:text-emerald-700 transition-colors uppercase tracking-tight">{item.Item}</h4>
-                        <p className="text-emerald-600 font-black text-lg">₹{item.Price}</p>
+                        <p className="text-emerald-600 font-black text-lg">₹{serviceType === "ironing" ? getIroningPrice(item.Item) : item.Price}</p>
                       </div>
                       
                       <div className="flex items-center gap-3 bg-emerald-50 p-1 rounded-full">
@@ -621,10 +630,10 @@ function BookingPageContent() {
                       <div className="flex-1">
                         <p className="font-bold text-sm text-gray-800 uppercase tracking-tight leading-none">{item.Item}</p>
                         <p className="text-[10px] text-gray-400 font-bold uppercase mt-1">
-                          {serviceType === "ironing" ? "Ironing" : "Dry Cleaning"} | ₹{serviceType === "ironing" ? 20 : item.Price} × {item.quantity}
+                          {serviceType === "ironing" ? "Ironing" : "Dry Cleaning"} | ₹{serviceType === "ironing" ? getIroningPrice(item.Item) : item.Price} × {item.quantity}
                         </p>
                       </div>
-                      <p className="font-black text-emerald-700">₹{formatPrice((serviceType === "ironing" ? 20 : item.Price) * item.quantity)}</p>
+                      <p className="font-black text-emerald-700">₹{formatPrice((serviceType === "ironing" ? getIroningPrice(item.Item) : item.Price) * item.quantity)}</p>
                     </div>
                   ))
                 )}
@@ -648,7 +657,7 @@ function BookingPageContent() {
       </div>
 
       {/* Floating Action Bar (Mobile-First) */}
-      <div className="fixed bottom-0 inset-x-0 p-4 bg-white/80 backdrop-blur-xl border-t border-gray-100 z-50">
+      <div className="fixed bottom-0 inset-x-0 p-4 bg-white/80 backdrop-blur-xl border-t border-gray-100 z-[60]">
         <div className="max-w-4xl mx-auto flex items-center justify-between gap-4">
           {step > 1 && (
             <Button 

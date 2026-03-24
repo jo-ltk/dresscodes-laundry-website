@@ -8,8 +8,8 @@ export function WhatsAppFloat() {
   const pathname = usePathname()
   const whatsappUrl = getWhatsAppHref("Hi! I'm interested in your laundry services.")
 
-  // Hide on dashboard pages
-  if (pathname?.startsWith("/dashboard")) {
+  // Hide on dashboard and booking pages
+  if (pathname?.startsWith("/dashboard") || pathname?.startsWith("/booking")) {
     return null
   }
 
