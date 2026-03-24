@@ -58,6 +58,10 @@ export const metadata: Metadata = {
   verification: {
     google: "your-google-verification-code",
   },
+  icons: {
+    icon: "/favicon.ico",
+    apple: "/apple-touch-icon.png",
+  },
     generator: 'v0.dev'
 }
 
@@ -71,7 +75,7 @@ export default function RootLayout({
       <head>
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-        <meta name="theme-color" content="#0d9488" />
+        <meta name="theme-color" content="#008c5b" />
       </head>
       <body className={inter.className}>
         <AuthProvider>
