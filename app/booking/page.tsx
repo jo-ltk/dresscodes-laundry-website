@@ -39,8 +39,7 @@ import {
   Sparkles,
   Zap,
   Ticket,
-  Waves,
-  Crown
+  Waves
 } from "lucide-react";
 import { format } from "date-fns";
 import { toast } from "@/hooks/use-toast";
@@ -96,14 +95,13 @@ function BookingPageContent() {
   const [locationCoords, setLocationCoords] = useState<{ lat: number | null; lng: number | null }>({ lat: null, lng: null });
 
   // Service Selection State
-  const [serviceType, setServiceType] = useState<"wash-iron" | "dry-clean" | "ironing" | "premium">("dry-clean");
+  const [serviceType, setServiceType] = useState<"wash-iron" | "dry-clean" | "ironing">("dry-clean");
   const [estWeight, setEstWeight] = useState(1);
 
   const mainServices = [
     { id: "wash-iron", title: "Wash & Iron", price: 160, unit: "kg", icon: <Waves className="h-5 w-5" /> },
     { id: "dry-clean", title: "Dry Clean", price: 100, unit: "pc", icon: <Sparkles className="h-5 w-5" /> },
     { id: "ironing", title: "Ironing", price: 20, unit: "pc", icon: <Zap className="h-5 w-5" /> },
-    { id: "premium", title: "Premium", price: 220, unit: "kg", icon: <Crown className="h-5 w-5" /> },
   ];
 
   // Categories for Step 1
@@ -129,12 +127,40 @@ function BookingPageContent() {
     return items;
   }, [selectedCategory, searchQuery]);
 
-  // Sync AI Chatbot data
+  // Sync AI Chatbot data & Home Page "Add to Cart"
   useEffect(() => {
     const service = searchParams.get("service");
     if (service && cart.length === 0) {
-      // If coming from AI with a recommended service, we can pre-add it if matched
-      // For now, we'll just show the items screen but pre-fill customer info
+      // Handle service param if needed
+    }
+
+    const saved = localStorage.getItem("dresscode_cart_fill");
+    if (saved) {
+      try {
+        const data = JSON.parse(saved);
+        if (data.items && data.items.length > 0) {
+          const newItems: CartItem[] = data.items.map((item: any, idx: number) => ({
+            SNo: -(idx + 1000), // Unique negative ID to avoid collision with pricingData
+            Item: item.name,
+            Price: parseInt(item.price.replace(/[^\d]/g, "")) || 0,
+            quantity: 1,
+            category: item.category || "General"
+          }));
+          
+          setCart(newItems);
+          if (data.serviceType) {
+            setServiceType(data.serviceType);
+          }
+          
+          toast({
+            title: "Cart Pre-filled",
+            description: `Added ${newItems.length} items from your selection.`,
+          });
+        }
+        localStorage.removeItem("dresscode_cart_fill");
+      } catch (e) {
+        console.error("Error parsing saved cart", e);
+      }
     }
   }, [searchParams]);
 
@@ -165,13 +191,12 @@ function BookingPageContent() {
   };
 
   const totalItems = useMemo(() => {
-    if (serviceType === "wash-iron" || serviceType === "premium") return 1;
+    if (serviceType === "wash-iron") return 1;
     return cart.reduce((sum, item) => sum + item.quantity, 0);
   }, [cart, serviceType]);
 
   const totalPrice = useMemo(() => {
     if (serviceType === "wash-iron") return estWeight * 160;
-    if (serviceType === "premium") return estWeight * 220;
     if (serviceType === "ironing") return cart.reduce((sum, item) => sum + (item.quantity * getIroningPrice(item.Item)), 0);
     return cart.reduce((sum, item) => sum + (item.quantity * item.Price), 0);
   }, [cart, serviceType, estWeight]);
@@ -208,7 +233,7 @@ function BookingPageContent() {
   const validateStep = (s: number) => {
     const newErrors: Record<string, string> = {};
     if (s === 1) {
-      const isWeightBased = serviceType === "wash-iron" || serviceType === "premium";
+      const isWeightBased = serviceType === "wash-iron";
       if (!isWeightBased && cart.length === 0) {
         toast({ title: "Cart empty", description: "Please add at least one item.", variant: "destructive" });
         return false;
@@ -239,13 +264,13 @@ function BookingPageContent() {
     setIsSubmitting(true);
 
     try {
-      const isWeightBased = serviceType === "wash-iron" || serviceType === "premium";
+      const isWeightBased = serviceType === "wash-iron";
       
       const payloadServices = isWeightBased 
         ? [{
             serviceId: serviceType,
-            name: serviceType === "wash-iron" ? "Wash & Iron" : "Premium Care",
-            price: serviceType === "wash-iron" ? 160 : 220,
+            name: "Wash & Iron",
+            price: 160,
             quantity: estWeight,
             category: "Laundry"
           }]
@@ -357,7 +382,7 @@ function BookingPageContent() {
         {step === 1 && (
           <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
             {/* Main Service Selection */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+            <div className="grid grid-cols-3 gap-3">
               {mainServices.map((s) => (
                 <button
                   key={s.id}
@@ -376,7 +401,6 @@ function BookingPageContent() {
                     {s.title === "Wash & Iron" && <Waves className="h-6 w-6" />}
                     {s.title === "Dry Clean" && <Sparkles className="h-6 w-6" />}
                     {s.title === "Ironing" && <Zap className="h-6 w-6" />}
-                    {s.title === "Premium" && <Crown className="h-6 w-6" />}
                   </div>
                   <span className="text-xs font-black uppercase tracking-widest">{s.title}</span>
                   <span className="text-[10px] font-bold opacity-60">₹{s.price}/{s.unit}</span>
@@ -384,7 +408,7 @@ function BookingPageContent() {
               ))}
             </div>
 
-            {(serviceType === "wash-iron" || serviceType === "premium") && (
+            {serviceType === "wash-iron" && (
               <Card className="rounded-[32px] border-none shadow-lg bg-white p-8 text-center space-y-4">
                 <div className="w-20 h-20 bg-emerald-50 rounded-full flex items-center justify-center mx-auto text-emerald-600">
                   <Waves className="h-10 w-10" />
@@ -615,11 +639,11 @@ function BookingPageContent() {
             <Card className="rounded-[32px] border-none shadow-lg bg-white overflow-hidden p-6 space-y-4">
               <h4 className="font-black uppercase tracking-widest text-gray-400 text-xs border-b pb-2">Order Review</h4>
               <div className="max-h-[200px] overflow-y-auto pr-2 space-y-3 thin-scrollbar">
-                {serviceType === "wash-iron" || serviceType === "premium" ? (
+                {serviceType === "wash-iron" ? (
                   <div className="flex justify-between items-center bg-gray-50 p-4 rounded-2xl border-l-4 border-emerald-500">
                     <div>
                       <p className="font-bold text-sm text-gray-800 uppercase tracking-tight leading-none">
-                        {serviceType === "wash-iron" ? "Wash & Iron" : "Premium Care"}
+                        Wash & Iron
                       </p>
                       <p className="text-[10px] text-gray-400 font-bold uppercase mt-1">Est. {estWeight} Kg</p>
                     </div>
@@ -647,7 +671,7 @@ function BookingPageContent() {
                 </div>
                 <div className="text-right">
                   <p className="text-[10px] text-gray-400 font-bold uppercase">
-                    {serviceType === "wash-iron" || serviceType === "premium" ? `${estWeight} Kg` : `${totalItems} Items`}
+                    {serviceType === "wash-iron" ? `${estWeight} Kg` : `${totalItems} Items`}
                   </p>
                   <Badge className="bg-emerald-100 text-emerald-700 hover:bg-emerald-100 border-none font-bold">Pay at Delivery</Badge>
                 </div>

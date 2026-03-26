@@ -60,8 +60,8 @@ export function Navigation({ variant = "solid" }: NavigationProps) {
           }}
         />
 
-        <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-12 relative z-10">
-          <div className="flex justify-between items-center h-20 md:h-24">
+        <div className="max-w-[1440px] mx-auto px-4 sm:px-10 lg:px-12 relative z-10">
+          <div className="flex justify-between items-center h-16 md:h-24">
             <div className="flex items-center">
               <Link href="/" aria-label="Dresscode Laundry Home" className="flex items-center">
                 <Image
@@ -108,7 +108,7 @@ export function Navigation({ variant = "solid" }: NavigationProps) {
               <Button
                 asChild
                 size="sm"
-                className="bg-black hover:bg-gray-900 text-white px-5 rounded-full text-[12px] font-bold uppercase tracking-wider"
+                className="bg-black hover:bg-gray-900 active:scale-95 text-white px-4 h-10 rounded-full text-[12px] font-bold uppercase tracking-wider transition-all"
               >
                 <Link href="/booking">Book Now</Link>
               </Button>
