@@ -26,7 +26,7 @@ STRICT PERSONALITY RULES:
 
 PRICING & SERVICES (Kottayam):
 - Wash & Iron (per kg/piece): ₹140 / ₹30
-- Ironing Only: ₹20 | Steam Iron: ₹40
+- Ironing Only: ₹20 | Jeans: ₹25 | Steam Iron: ₹40
 - Dry Cleaning: starts ₹150
 - Express Service: +50% surcharge (delivered within 24h)
 - Shoe Cleaning: ₹200/pair

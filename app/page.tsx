@@ -61,9 +61,17 @@ export default function HomePage() {
         { item: "Shawl, Blouse", price: "₹15" },
         { item: "Shirt, T-Shirt, Pant (F/M), Churidar Top", price: "₹20" },
         { item: "Dhothi", price: "₹30" },
+        { item: "Jeans", price: "₹25" },
         { item: "Saree, Churidar Set", price: "₹40" },
       ],
       description: "Crisp, professional steam ironing for all your garments.",
+    },
+    {
+      id: "washing",
+      name: "Washing",
+      icon: Waves,
+      prices: [{ item: "Washing + Fragrance", price: "₹110/kg" }],
+      description: "Gentle wash with eco-friendly detergents and laundry scent.",
     },
     {
       id: "wash-and-iron",
@@ -73,7 +81,7 @@ export default function HomePage() {
         { item: "Washing + Fragrance + Ironing", price: "₹170/kg" },
         {
           item: "Washing + Starching + Ironing + Fragrance + Next Day Delivery",
-          price: "₹230/kg",
+          price: "₹220/kg",
         },
         {
           item: "Washing + Ironing + Fragrance + Same Day Delivery",
@@ -81,13 +89,6 @@ export default function HomePage() {
         },
       ],
       description: "Complete care: washed, dried, and professionally ironed.",
-    },
-    {
-      id: "washing",
-      name: "Washing",
-      icon: Waves,
-      prices: [{ item: "Washing + Fragrance", price: "₹110/kg" }],
-      description: "Gentle wash with eco-friendly detergents and laundry scent.",
     },
     {
       id: "dry-cleaning",
@@ -104,7 +105,7 @@ export default function HomePage() {
     },
     {
       id: "other",
-      name: "Other Services",
+      name: "Household Items",
       icon: CheckCircle,
       prices: [
         { item: "Shoe, Toy, Helmet, Bag Cleaning", price: "₹320" },

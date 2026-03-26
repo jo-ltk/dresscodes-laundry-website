@@ -60,6 +60,7 @@ const getIroningPrice = (itemName: string) => {
   const name = itemName.toLowerCase();
   if (name.includes("shawl") || name.includes("blouse")) return 15;
   if (name.includes("dhoti") || name.includes("dhothi")) return 30;
+  if (name.includes("jeans")) return 25;
   if (name.includes("saree") || name.includes("salwar") || name.includes("suit")) return 40;
   return 20;
 };
